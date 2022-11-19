@@ -22,4 +22,17 @@ class BecomeMentorController extends AbstractController
             'currentUserId' => $currentUserId,
         ]);
     }
+
+    public function becomeMentor_post(ServerRequestInterface $request): ResponseInterface
+    {
+        $currentUser = $this->getCurrentUser();
+        $currentUserId = $currentUser->getId();
+
+        // TODO: we can pre-fill some user data in the future
+        return $this->renderTemplate('becomeMentor/index.tpl', [
+            'logoutActionUrl' => '/auth/logout',
+            'formSubmitActionUrl' => '/becomeMentor',
+            'currentUserId' => $currentUserId,
+        ]);
+    }
 }

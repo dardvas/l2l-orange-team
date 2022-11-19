@@ -1,5 +1,5 @@
 <header>
-    Logged in as {$currentUser.username}
+    Logged in as {$currentUserId}
     <form method="post" action="{$logoutActionUrl}">
         <input type="submit" value="Logout">
     </form>

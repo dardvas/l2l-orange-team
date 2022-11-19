@@ -4,6 +4,8 @@ declare(strict_types=1);
 use App\Application\Controllers\Admin\AdminController;
 use App\Application\Controllers\Auth\AuthController;
 use App\Application\Controllers\Feed\FeedController;
+use App\Application\Controllers\L2lOrange\BecomeMentorController;
+use App\Application\Controllers\L2lOrange\FindMentorController;
 use App\Application\Controllers\Subscription\SubscriptionController;
 use App\Application\Controllers\Test\TestController;
 use App\Application\Controllers\Tweet\TweetController;
@@ -62,6 +64,31 @@ return function (App $app) {
 
     // AUTHORIZED GROUP
     $app->group('', function (Group $group) use ($app, $container) {
+        $app->group('/findMentor', function (Group $group) use ($container) {
+            $group->get('', function (Request $request, Response $response) use ($container) {
+                $controller = $container->get(FindMentorController::class);
+                return $controller->findMentor_get($request);
+            });
+
+            $group->post('', function (Request $request, Response $response) use ($container) {
+                $controller = $container->get(FindMentorController::class);
+                return $controller->findMentor_post($request);
+            });
+        });
+
+        $app->group('/becomeMentor', function (Group $group) use ($container) {
+            $group->get('', function (Request $request, Response $response) use ($container) {
+                $controller = $container->get(BecomeMentorController::class);
+                return $controller->becomeMentor_get($request);
+            });
+
+            $group->post('', function (Request $request, Response $response) use ($container) {
+                $controller = $container->get(BecomeMentorController::class);
+                return $controller->becomeMentor_post($request);
+            });
+        });
+
+
         $app->group('/feed', function (Group $group) use ($container) {
             $group->get('', function (Request $request, Response $response) use ($container) {
                 $feedController = $container->get(FeedController::class);
