@@ -4,6 +4,8 @@
 namespace App\Application\Controllers\L2lOrange;
 
 use App\Application\Controllers\AbstractController;
+use App\Domain\L2lOrange\Dicts\CategoriesDict;
+use App\Domain\L2lOrange\Dicts\TimeslotsDict;
 use App\Domain\Social\OtherUserFeed;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -19,7 +21,9 @@ class BecomeMentorController extends AbstractController
         return $this->renderTemplate('becomeMentor/index.tpl', [
             'logoutActionUrl' => '/auth/logout',
             'formSubmitActionUrl' => '/becomeMentor',
-            'currentUserId' => $currentUserId,
+            'currentUser' => $currentUser->jsonSerialize(),
+            'timeslots' => TimeslotsDict::VALUES,
+            'categories' => CategoriesDict::VALUES,
         ]);
     }
 
