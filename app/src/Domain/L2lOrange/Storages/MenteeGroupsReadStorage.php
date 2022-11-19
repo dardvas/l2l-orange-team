@@ -61,4 +61,30 @@ class MenteeGroupsReadStorage extends AbstractStorage
 
         return $groups;
     }
+
+    /**
+     * @param array $excludedIds
+     * @return MenteeGroup[]
+     */
+    public function getAllGroupsExcept(array $excludedIds): array
+    {
+        $st = $this->pdo->prepare("SELECT * FROM {$this->getTableName()} WHERE id NOT IN (:excluded_ids)");
+        $excludedIdsStr = empty($excludedIds) ? '' : implode(',', $excludedIds);
+        $st->bindParam(':excluded_ids', $excludedIdsStr);
+        $st->execute();
+
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+
+        $groups = [];
+        foreach ($rows as $row) {
+            $groups[] = new MenteeGroup(
+                (int) $row['id'],
+                (int) $row['timeslot_id'],
+                (int) $row['category_id'],
+                (bool) $row['is_one_time'],
+            );
+        }
+
+        return $groups;
+    }
 }

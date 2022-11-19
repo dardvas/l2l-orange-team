@@ -71,4 +71,32 @@ class MentorsReadStorage extends AbstractStorage
 
         return $roles;
     }
+
+    /**
+     * @param array $excludeIds
+     * @return MentorRole[]
+     */
+    public function getAllMentorsExcept(array $excludeIds): array
+    {
+        $st = $this->pdo->prepare("SELECT * FROM {$this->getTableName()} WHERE 
+                        id NOT IN (:exclude_ids)");
+
+        $excludeIdsStr = empty($excludeIds) ? '' : implode(',', $excludeIds);
+        $st->bindParam(':exclude_ids', $excludeIdsStr);
+        $st->execute();
+
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+        $roles = [];
+        foreach ($rows as $row) {
+            $roles[] = new MentorRole(
+                (int) $row['id'],
+                (int) $row['user_id'],
+                (int) $row['timeslot_id'],
+                (int) $row['category_id'],
+                (bool) $row['is_one_time'],
+            );
+        }
+
+        return $roles;
+    }
 }

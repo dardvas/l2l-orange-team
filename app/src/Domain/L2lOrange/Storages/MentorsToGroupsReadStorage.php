@@ -54,4 +54,30 @@ class MentorsToGroupsReadStorage extends AbstractStorage
 
         return $mentorIds;
     }
+
+    public function getAllAssignedMentorsIds(): array
+    {
+        $st = $this->pdo->query("SELECT * FROM {$this->getTableName()}");
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+
+        $mentorIds = [];
+        foreach ($rows as $row) {
+            $mentorIds[] = $row['mentor_id'];
+        }
+
+        return $mentorIds;
+    }
+
+    public function getAllAssignedGroupsIds(): array
+    {
+        $st = $this->pdo->query("SELECT * FROM {$this->getTableName()}");
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+
+        $groupIds = [];
+        foreach ($rows as $row) {
+            $groupIds[] = $row['group_id'];
+        }
+
+        return $groupIds;
+    }
 }
