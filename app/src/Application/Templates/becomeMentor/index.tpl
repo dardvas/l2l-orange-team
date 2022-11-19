@@ -22,8 +22,8 @@
         </div>
 
         <div class="form">
-            <label for="checkbox">I want to do one-time meetings only </label>
-            <input type="checkbox" name="checkbox" maxlength="30" class="form-control" id="checkbox"
+            <label for="is_one_time">I want to do one-time meetings only </label>
+            <input type="checkbox" name="is_one_time" maxlength="30" class="form-control" id="is_one_time"
         </div>
 
         <div class="form">
@@ -35,7 +35,10 @@
             </select>
         </div>
 
-        <input type="hidden" name="user_id" value="{$currentUser.id}">
+        <div class="form">
+            <label for="request">Please describe what you can help with</label>
+            <input type="text" name="request" maxlength="30" class="form-control" id="request"
+        </div>
 
         <input type="submit" value="Submit">
 

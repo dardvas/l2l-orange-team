@@ -35,7 +35,10 @@
             </select>
         </div>
 
-        <input type="hidden" name="user_id" value="{$currentUser.id}">
+        <div class="form">
+            <label for="request">Please describe your request</label>
+            <input type="text" name="request" maxlength="30" class="form-control" id="request"
+        </div>
 
         <input type="submit" value="Submit">
 

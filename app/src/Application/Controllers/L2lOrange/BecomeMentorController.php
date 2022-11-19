@@ -6,18 +6,30 @@ namespace App\Application\Controllers\L2lOrange;
 use App\Application\Controllers\AbstractController;
 use App\Domain\L2lOrange\Dicts\CategoriesDict;
 use App\Domain\L2lOrange\Dicts\TimeslotsDict;
-use App\Domain\Social\OtherUserFeed;
+use App\Domain\L2lOrange\Dto\CreateMentorDto;
+use App\Domain\L2lOrange\Services\BecomeMentorService;
+use App\Infrastructure\Containers\ControllerUtils;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Psr\Log\LoggerInterface;
 
 class BecomeMentorController extends AbstractController
 {
+    private BecomeMentorService $becomeMentorService;
+
+    public function __construct(
+        LoggerInterface $logger,
+        ControllerUtils $controllerUtils,
+        BecomeMentorService $becomeMentorService
+    ) {
+        parent::__construct($logger, $controllerUtils);
+        $this->becomeMentorService = $becomeMentorService;
+    }
+
     public function becomeMentor_get(ServerRequestInterface $request): ResponseInterface
     {
         $currentUser = $this->getCurrentUser();
-        $currentUserId = $currentUser->getId();
 
-        // TODO: we can pre-fill some user data in the future
         return $this->renderTemplate('becomeMentor/index.tpl', [
             'logoutActionUrl' => '/auth/logout',
             'formSubmitActionUrl' => '/becomeMentor',
@@ -33,18 +45,19 @@ class BecomeMentorController extends AbstractController
         $currentUserId = $currentUser->getId();
 
         $requestParams = $request->getParsedBody();
-        $this->validateRequired($requestParams, ['time_slot_id', 'is_one_time', 'request', 'category_id']);
+        $this->validateRequired($requestParams, ['timeslot_id', 'request', 'category_id']);
 
-        $timeSlotId = (int) $requestParams['time_slot_id'];
-        $isOneTime = (bool) $requestParams['is_one_time'];
-        $mentorshipRequest = $requestParams['request'];
-        $categoryId = (int) $requestParams['category_id'];
+        $this->becomeMentorService->createNewMentor(new CreateMentorDto(
+            $currentUserId,
+            (int) $requestParams['timeslot_id'],
+            isset($requestParams['is_one_time']),
+            $requestParams['request'],
+            (int) $requestParams['category_id'],
+        ));
 
-        // TODO: we can pre-fill some user data in the future
-        return $this->renderTemplate('becomeMentor/index.tpl', [
+        return $this->renderTemplate('becomeMentor/success.tpl', [
             'logoutActionUrl' => '/auth/logout',
-            'formSubmitActionUrl' => '/becomeMentor',
-            'currentUserId' => $currentUserId,
+            'currentUser' => $currentUser->jsonSerialize(),
         ]);
     }
 }
