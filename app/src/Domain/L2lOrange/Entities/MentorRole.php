@@ -3,7 +3,7 @@
 
 namespace App\Domain\L2lOrange\Entities;
 
-class MentorRole
+class MentorRole implements \JsonSerializable
 {
     private int $mentorId;
     private int $userId;
@@ -49,5 +49,16 @@ class MentorRole
     public function isOneTime(): bool
     {
         return $this->isOneTime;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'mentor_id' => $this->mentorId,
+            'userId' => $this->userId,
+            'timeslotId' => $this->timeslotId,
+            'isOneTime' => $this->isOneTime,
+            'categoryId' => $this->categoryId,
+        ];
     }
 }
