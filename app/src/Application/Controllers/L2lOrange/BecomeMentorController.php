@@ -28,6 +28,14 @@ class BecomeMentorController extends AbstractController
         $currentUser = $this->getCurrentUser();
         $currentUserId = $currentUser->getId();
 
+        $requestParams = $request->getParsedBody();
+        $this->validateRequired($requestParams, ['time_slot_id', 'is_one_time', 'request', 'category_id']);
+
+        $timeSlotId = (int) $requestParams['time_slot_id'];
+        $isOneTime = (bool) $requestParams['is_one_time'];
+        $mentorshipRequest = $requestParams['request'];
+        $categoryId = (int) $requestParams['category_id'];
+
         // TODO: we can pre-fill some user data in the future
         return $this->renderTemplate('becomeMentor/index.tpl', [
             'logoutActionUrl' => '/auth/logout',

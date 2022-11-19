@@ -6,43 +6,37 @@
         <input type="submit" value="Logout">
     </form>
 </header>
-</head>
-
 
 <main>
+    <h1>Become a mentor</h1>
+
     <form method="post" action="{$formSubmitActionUrl}">
 
         <div class="form">
-            <label for="category">Choose appropriate time for you (GMT+3)</label>
-            <select name="category" id="category">
-                <option value="1">From 9 AM to 12 PM</option>
-                <option value="2">From 12 PM to 3 PM</option>
-                <option value="3">From 3 PM to 6 PM</option>
-                <option value="4">From 6 PM to 10 PM</option>
+            <label for="timeslot_id">Choose appropriate time for you (GMT+3)</label>
+            <select name="timeslot_id" id="timeslot_id">
+                {foreach $timeslots as $key => $value}
+                    <option value="{$key}">{$value}</option>
+                {/foreach}
             </select>
-         </div>
-        <div class="form">
-        <label for="checkbox">I need only one meeting </label>  
-        <input type="checkbox" name="checkbox" maxlength="30" class="form-control" id="checkbox"
         </div>
 
         <div class="form">
-            <label for="category">Choose a category</label>
-            <select name="category" id="category">
-                <option value="1">Work</option>
-                <option value="2">Rent</option>
-                <option value="3">Visa, documents</option>
-                <option value="4">Language</option>
-                <option value="5">Health</option>
-                <option value="6">Childcare</option>
-                <option value="7">Other</option>
-            </select>
-         </div>
-        
+            <label for="checkbox">I want to do one-time meetings only </label>
+            <input type="checkbox" name="checkbox" maxlength="30" class="form-control" id="checkbox"
+        </div>
 
-        <label for="input-tweet-message"></label>
-        <input type="text" id="input-tweet-message" name="message">
-        <input type="hidden" name="user_id" value="{$currentUserId}">
+        <div class="form">
+            <label for="category_id">Choose a category</label>
+            <select name="category_id" id="category_id">
+                {foreach $categories as $key => $value}
+                    <option value="{$key}">{$value}</option>
+                {/foreach}
+            </select>
+        </div>
+
+        <input type="hidden" name="user_id" value="{$currentUser.id}">
+
         <input type="submit" value="Submit">
 
     </form>
@@ -50,4 +44,4 @@
 </main>
 
 
-</aside>
+</html>
