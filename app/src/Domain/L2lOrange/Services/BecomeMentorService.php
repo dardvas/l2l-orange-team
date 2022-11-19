@@ -9,14 +9,18 @@ use App\Domain\L2lOrange\Storages\MentorsWriteStorage;
 class BecomeMentorService
 {
     private MentorsWriteStorage $mentorsWriteStorage;
+    private MatchingService $matchingService;
 
     public function __construct(
-        MentorsWriteStorage $mentorsWriteStorage
+        MentorsWriteStorage $mentorsWriteStorage,
+        MatchingService $matchingService
     ) {
         $this->mentorsWriteStorage = $mentorsWriteStorage;
+        $this->matchingService = $matchingService;
     }
 
     public function createNewMentor(CreateMentorDto $createMentorDto): void {
         $this->mentorsWriteStorage->createNewMentor($createMentorDto);
+        $this->matchingService->tryAssigningMentors();
     }
 }
