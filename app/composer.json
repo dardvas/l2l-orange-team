@@ -24,7 +24,7 @@
     "require": {
         "ext-json": "*",
         "monolog/monolog": "^1.24",
-        "php": ">=7.4",
+        "php": ">=8.0",
         "php-di/php-di": "^6.0",
         "slim/psr7": "^0.5",
         "slim/slim": "^4.1",
@@ -33,7 +33,8 @@
         "php-http/guzzle6-adapter": "2.0.1",
         "zendframework/zend-diactoros": "2.2.1",
         "smarty/smarty": "3.1.39",
-        "symfony/http-foundation": "5.2.3"
+        "symfony/http-foundation": "5.2.3",
+        "ext-http": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.5"
