@@ -3,6 +3,8 @@
 <hr>
 <a href="{$myGroupsUrl}">I advise</a>
 <b><a href=".">I attend</a></b>
+<br><br>
+<a href="{$findMentorUrl}">Find an advisor</a>
 <ul>
     {foreach $myMentors as $mentor}
         <li>{$mentor}</li>

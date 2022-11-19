@@ -26,6 +26,7 @@ class IndexController extends AbstractController
             'signupUrl' => '/auth/signup',
             'findMentorUrl' => '/findMentor',
             'becomeMentorUrl' => '/becomeMentor',
+            'profileUrl' => '/profile/myGroups',
             'currentUser' => $isAuthorized ? $currentUser->jsonSerialize() : null,
             'isAuthorized' => $isAuthorized,
         ]);

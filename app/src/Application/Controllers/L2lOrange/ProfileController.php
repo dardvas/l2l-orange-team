@@ -39,6 +39,7 @@ class ProfileController extends AbstractController
         return $this->renderTemplate('profile/myGroups.tpl', [
             'logoutActionUrl' => '/auth/logout',
             'myMentorsUrl' => '/profile/myMentors',
+            'becomeMentorUrl' => '/becomeMentor',
             'currentUser' => $currentUser->jsonSerialize(),
             'myGroups' => \GuzzleHttp\json_encode($myGroups),
         ]);
@@ -52,6 +53,7 @@ class ProfileController extends AbstractController
         return $this->renderTemplate('profile/myMentors.tpl', [
             'logoutActionUrl' => '/auth/logout',
             'myGroupsUrl' => '/profile/myGroups',
+            'findMentorUrl' => '/findMentor',
             'currentUser' => $currentUser->jsonSerialize(),
             'myMentors' => \GuzzleHttp\json_encode($myMentors),
         ]);
