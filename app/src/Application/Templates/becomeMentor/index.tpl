@@ -22,7 +22,7 @@
             </select>
          </div>
         <div class="form">
-        <label for="checkbox">I need only one meeting </label>  
+        <label for="checkbox">I need occurring meetings</label>  
         <input type="checkbox" name="checkbox" maxlength="30" class="form-control" id="checkbox"
         </div>
 
@@ -39,14 +39,17 @@
             </select>
          </div>
         
-
+         <div class="form">
+            <label for="request_text">Type your request here:</label>
+            <br>
+            <textarea rows = "5" cols = "60" id="request_description" name = "request_description">
+               Enter details here...
+            </textarea><br>
+        </div>
         <label for="input-tweet-message"></label>
-        <input type="text" id="input-tweet-message" name="message">
         <input type="hidden" name="user_id" value="{$currentUserId}">
         <input type="submit" value="Submit">
-
     </form>
-
 </main>
 
 
