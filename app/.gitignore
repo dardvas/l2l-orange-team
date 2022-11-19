@@ -1,0 +1,5 @@
+/vendor/
+/.idea/
+/var/cache/
+/logs/
+/public/templates_c/
