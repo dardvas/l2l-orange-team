@@ -87,45 +87,14 @@ return function (App $app) {
                 return $controller->becomeMentor_post($request);
             });
         });
-
-
-        $app->group('/feed', function (Group $group) use ($container) {
-            $group->get('', function (Request $request, Response $response) use ($container) {
-                $feedController = $container->get(FeedController::class);
-
-                return $feedController->feed_get($request);
-            });
-
-            $group->get('/{userId}', function (Request $request, Response $response, $args) use ($container) {
-                $feedController = $container->get(FeedController::class);
-
-                return $feedController->feedByUserId_get($request, (int) $args['userId']);
-            });
-        });
-
-        $app->group('/tweet', function (Group $group) use ($container) {
-            $group->post('', function (Request $request, Response $response) use ($container) {
-                $tweetController = $container->get(TweetController::class);
-
-                return $tweetController->tweet_post($request);
-            });
-        });
-
-        $app->group('/subscribe', function (Group $group) use ($container) {
-            $group->post('', function (Request $request, Response $response) use ($container) {
-                $subController = $container->get(SubscriptionController::class);
-
-                return $subController->subscribe_post($request);
-            });
-        });
     })->addMiddleware($container->get(AuthMiddleware::class));
 
-    $app->group('/admin', function (Group $group) use ($app, $container) {
-        $group->get('/auth_as_user', function (Request $request, Response $response) use ($container) {
-            $adminController = $container->get(AdminController::class);
-
-            return $adminController->authAsUser_get($request);
-        });
-    })->addMiddleware($container->get(AdminAuthMiddlware::class));
+//    $app->group('/admin', function (Group $group) use ($app, $container) {
+//        $group->get('/auth_as_user', function (Request $request, Response $response) use ($container) {
+//            $adminController = $container->get(AdminController::class);
+//
+//            return $adminController->authAsUser_get($request);
+//        });
+//    })->addMiddleware($container->get(AdminAuthMiddlware::class));
 
 };

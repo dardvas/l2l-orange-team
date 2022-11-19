@@ -27,8 +27,7 @@ class TestController extends AbstractController
 
     public function action_test(ServerRequestInterface $request): ResponseInterface
     {
-        return $this->json($this->userStorage->getUsers());
-
+        return $this->json([]);
 
         return $this->renderTemplate('test/test.tpl', [
             'a' => 'b',
