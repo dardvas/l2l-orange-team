@@ -5,6 +5,7 @@ namespace App\Domain\L2lOrange\Storages;
 
 use App\Application\Db\AbstractStorage;
 use App\Domain\L2lOrange\Dto\CreateMenteeDto;
+use App\Domain\L2lOrange\Entities\MenteeGroup;
 use PDO;
 
 class MenteeGroupsReadStorage extends AbstractStorage
@@ -35,5 +36,29 @@ class MenteeGroupsReadStorage extends AbstractStorage
         return (int) $row['id'];
     }
 
+    public function getGroupsByIds(array $groupIds): array
+    {
+        if (empty($groupIds)) {
+            return [];
+        }
 
+        $st = $this->pdo->prepare("SELECT * FROM {$this->getTableName()} WHERE id IN (:group_ids)");
+        $groupIdsStr = implode(',', $groupIds);
+        $st->bindParam(':group_ids', $groupIdsStr);
+        $st->execute();
+
+        $rows = $st->fetchAll(PDO::FETCH_ASSOC);
+
+        $groups = [];
+        foreach ($rows as $row) {
+            $groups[] = new MenteeGroup(
+                (int) $row['id'],
+                (int) $row['timeslot_id'],
+                (int) $row['category_id'],
+                (bool) $row['is_one_time'],
+            );
+        }
+
+        return $groups;
+    }
 }

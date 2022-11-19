@@ -4,8 +4,10 @@ declare(strict_types=1);
 use App\Application\Controllers\Admin\AdminController;
 use App\Application\Controllers\Auth\AuthController;
 use App\Application\Controllers\Feed\FeedController;
+use App\Application\Controllers\Index\IndexController;
 use App\Application\Controllers\L2lOrange\BecomeMentorController;
 use App\Application\Controllers\L2lOrange\FindMentorController;
+use App\Application\Controllers\L2lOrange\ProfileController;
 use App\Application\Controllers\Subscription\SubscriptionController;
 use App\Application\Controllers\Test\TestController;
 use App\Application\Controllers\Tweet\TweetController;
@@ -22,10 +24,9 @@ return function (App $app) {
         throw new RuntimeException('Unable to get container instance');
     }
 
-    $app->get('/', function (Request $request, Response $response) {
-        $response->getBody()->write('Hello world!');
-
-        return $response;
+    $app->get('/', function (Request $request, Response $response) use ($container) {
+        $controller = $container->get(IndexController::class);
+        return $controller->index_get($request);
     });
 
     $app->any('/test', function (Request $request, Response $response) use ($container) {
@@ -85,6 +86,18 @@ return function (App $app) {
             $group->post('', function (Request $request, Response $response) use ($container) {
                 $controller = $container->get(BecomeMentorController::class);
                 return $controller->becomeMentor_post($request);
+            });
+        });
+
+        $app->group('/profile', function (Group $group) use ($container) {
+            $group->get('/myMentors', function (Request $request, Response $response) use ($container) {
+                $controller = $container->get(ProfileController::class);
+                return $controller->myMentors_get($request);
+            });
+
+            $group->get('/myGroups', function (Request $request, Response $response) use ($container) {
+                $controller = $container->get(ProfileController::class);
+                return $controller->myGroups_get($request);
             });
         });
     })->addMiddleware($container->get(AuthMiddleware::class));
