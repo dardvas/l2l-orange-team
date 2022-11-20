@@ -13,15 +13,18 @@ class FindMentorService
     private MenteeGroupsReadStorage $menteeGroupsReadStorage;
     private MenteeGroupsWriteStorage $menteeGroupsWriteStorage;
     private MenteeGroupsMembersWriteStorage $menteeGroupsMembersWriteStorage;
+    private MatchingService $matchingService;
 
     public function __construct(
         MenteeGroupsReadStorage $menteeGroupsReadStorage,
         MenteeGroupsWriteStorage $menteeGroupsWriteStorage,
-        MenteeGroupsMembersWriteStorage $menteeGroupsMembersWriteStorage
+        MenteeGroupsMembersWriteStorage $menteeGroupsMembersWriteStorage,
+        MatchingService $matchingService
     ) {
         $this->menteeGroupsReadStorage = $menteeGroupsReadStorage;
         $this->menteeGroupsWriteStorage = $menteeGroupsWriteStorage;
         $this->menteeGroupsMembersWriteStorage = $menteeGroupsMembersWriteStorage;
+        $this->matchingService = $matchingService;
     }
 
     public function createMenteeGroupOrAddToExisting(CreateMenteeDto $createMenteeDto): void
@@ -35,5 +38,7 @@ class FindMentorService
         }
 
         $this->menteeGroupsMembersWriteStorage->addUserToGroup($createMenteeDto->getUserId(), $groupId);
+
+        $this->matchingService->tryAssigningMentors();
     }
 }

@@ -9,7 +9,7 @@
 
 <main>
     <h1>Form submitted!</h1>
-
+    <a href="/">Home</a>
 </main>
 
 

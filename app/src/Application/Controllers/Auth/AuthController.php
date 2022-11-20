@@ -51,14 +51,14 @@ class AuthController extends AbstractController
 
         $this->loginService->loginByUsernameAndPassword($username, $password);
 
-        return $this->redirect('/feed');
+        return $this->redirect('/');
     }
 
     public function logout_post(ServerRequestInterface $request): ResponseInterface
     {
         $this->authService->deleteUserFromSession();
 
-        return $this->redirect('/auth/login');
+        return $this->redirect('/');
     }
 
     public function signup_get(ServerRequestInterface $request): ResponseInterface
@@ -85,6 +85,6 @@ class AuthController extends AbstractController
         $user = $this->signupService->registerNewUser($username, $password);
         $this->authService->authUserToSession($user);
 
-        return $this->redirect('/feed');
+        return $this->redirect('/');
     }
 }
