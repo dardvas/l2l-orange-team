@@ -36,6 +36,9 @@ class FindMentorController extends AbstractController
         return $this->renderTemplate('findMentor/index.tpl', [
             'logoutActionUrl' => '/auth/logout',
             'formSubmitActionUrl' => '/findMentor',
+            'findMentorUrl' => '/findMentor',
+            'becomeMentorUrl' => '/becomeMentor',
+            'profileUrl' => '/profile/myGroups',
             'currentUser' => $currentUser->jsonSerialize(),
             'timeslots' => TimeslotsDict::VALUES,
             'categories' => CategoriesDict::VALUES,
