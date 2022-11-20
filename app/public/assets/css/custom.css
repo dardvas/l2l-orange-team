@@ -1,0 +1,80 @@
+
+/* Add a black background color to the top navigation */
+.topnav {
+    background-color: #4D44C6;
+    overflow: hidden;
+}
+
+/* Style the links inside the navigation bar */
+.topnav a {
+    float: left;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+/* Change the color of links on hover */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Add a color to the active/current link */
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
+
+
+.topnavhelp a {
+    background-color: #333;
+    float: left;
+    color: #4D44C6;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    padding: 1em;
+}
+
+
+.container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 5px;
+    line-height: 1.5;
+}
+
+.text {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 60px;
+}
+
+
+.button {
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 12px
+}
+
+.button{
+    color:#fff;background-color:#0d6efd;border-color:#0d6efd
+}
+
+.button:hover{
+    color:#fff;background-color:#0b5ed7;border-color:#0a58ca}
+
+
+.footer a {
+    background-color: #f1f1f1;
+    padding: 10px;
+}
