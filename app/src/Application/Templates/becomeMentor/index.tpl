@@ -6,6 +6,7 @@
     <meta name="description" content="Become mentor for refugee and expats">
     <meta name="keywords" content="mentor advise refugee expats">
     <link rel="stylesheet" type="text/css" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/custom.css">
     <title>Become a advisor</title>
 </head>
 

@@ -38,15 +38,6 @@
     padding: 1em;
 }
 
-
-.container {
-    display: grid;
-    align-items: center;
-    grid-template-columns: 1fr 1fr 1fr;
-    column-gap: 5px;
-    line-height: 1.5;
-}
-
 .text {
     font-style: normal;
     font-weight: 800;
@@ -74,7 +65,7 @@
     color:#fff;background-color:#0b5ed7;border-color:#0a58ca}
 
 
-.footer a {
+.footer p {
     background-color: #f1f1f1;
-    padding: 10px;
+    padding: 10px 0 10px 0;
 }
